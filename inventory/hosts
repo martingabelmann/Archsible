@@ -2,8 +2,13 @@
 htpc
 
 [laptops]
-t60 ansible_python_interpreter=/usr/bin/python2
+t60 
 talap
 
 [desktops]
+archy
+
+[arch]
+t60
+talap
 archy
