@@ -20,5 +20,5 @@ touch roles/$1/meta/main.yml
 
 echo "---" >> roles/$1/tasks/main.yml
 
-echo -e "---\n\ndependencies:\n- handler" >> roles/$1/meta/main.yml
+echo -e "---\n\ndependencies:\n    - handler" >> roles/$1/meta/main.yml
 

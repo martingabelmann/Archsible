@@ -1,2 +1,6 @@
 ---
 
+- name: packages
+  hosts: all
+  roles: 
+    - packages
