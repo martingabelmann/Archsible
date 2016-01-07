@@ -1,0 +1,7 @@
+---
+
+
+- name: start apache
+  hosts: laptops
+  roles: 
+    - apache 

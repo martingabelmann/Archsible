@@ -1,0 +1,9 @@
+[servers]
+htpc
+
+[laptops]
+t60 ansible_python_interpreter=/usr/bin/python2
+talap
+
+[desktops]
+archy
