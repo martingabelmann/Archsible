@@ -1,0 +1,8 @@
+
+PermitRootLogin no
+AuthorizedKeysFile	.ssh/authorized_keys
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no # pam does that
+UsePrivilegeSeparation sandbox		# Default for new installations.

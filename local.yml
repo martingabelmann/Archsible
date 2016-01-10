@@ -1,6 +1,9 @@
 ---
 
-- name: packages
+- name: common plays for everyone
   hosts: all
   roles: 
     - packages
+    - sshd
+
+
