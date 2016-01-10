@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pacman -Syu --noconfirm --ignore {{ ignore_package_upgrades }} &>> /var/log/autoupdate.log
+
