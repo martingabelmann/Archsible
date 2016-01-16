@@ -1,5 +1,13 @@
 ---
 
+
+enabled_services:
+    - sshd
+    - cronie
+    - munin-node
+    - cups-browsed
+
+
 common_packages:
     - openssh
     - openssl
