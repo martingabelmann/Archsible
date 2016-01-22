@@ -1,11 +1,11 @@
 ---
 
 - name: install common packages
-  pacman: name={{ item }} state={{ UPGRADE|default('present') }}
+  pacman: name={{ item }} state={{ packages_state }}
   with_items: common_packages
 
 - name: install xpackages
-  pacman: name={{ item }} state={{ UPGRADE|default('present') }}
+  pacman: name={{ item }} state={{ packages_state }}
   with_items: xpackages
   when: "'server' not in group_names"
 

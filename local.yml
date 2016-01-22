@@ -3,9 +3,11 @@
 - name: common plays for everyone
   hosts: all
   roles: 
-    - packages
+    - { role: packages, tags: ['packages'] }
     - sshd
     - autoupdate
+
+
 
 - name: firewall
   hosts: all

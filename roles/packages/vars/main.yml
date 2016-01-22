@@ -1,5 +1,7 @@
 ---
 
+#set to latest for uprades
+packages_state: present
 
 enabled_services:
     - sshd
@@ -9,17 +11,15 @@ enabled_services:
 
 
 common_packages:
+    - alsa-utils
+    - cups
     - openssh
     - openssl
+    - sshpass
     - vim
     - tmux
     - mosh
-    - python
-    - python2
     - acpi
-    - alsa
-    - cups
-    - munin
     - munin-node
     - gcc
     - make
@@ -37,7 +37,8 @@ common_packages:
     - python-sip
     - python-tox
     - python-virtualenv
-    - python-yam
+    - python-yaml
+    - python
     - python2
     - python2-cairo
     - python2-cffi
@@ -46,7 +47,6 @@ common_packages:
     - python2-ecdsa
     - python2-gconf
     - python2-gobject2
-    - python2-i3-git
     - python2-jinja
     - python2-keybinder2
     - python2-markupsafe
@@ -59,7 +59,6 @@ common_packages:
     - python2-pycparser
     - python2-pygame
     - python2-pygit2
-    - python2-pyuv
     - python2-setuptools
     - python2-xdg
     - python2-yaml
@@ -73,8 +72,6 @@ common_packages:
     - zsh
     - zsh-completions
     - zsh-syntax-highlighting
-    - zathura
-    - gutenprint
 
 xpackages:
     - xorg-server
@@ -101,3 +98,4 @@ xpackages:
     - jre8-openjdk-headless
     - xclip
     - xpad
+    - zathura
