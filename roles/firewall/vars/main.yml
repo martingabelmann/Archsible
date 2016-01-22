@@ -1,3 +1,8 @@
 ---
 
-
+rules:
+  all:
+    ssh:
+      protocol: 'tcp'
+      source: '{{ internal_subnet }}'
+      port: '22'
