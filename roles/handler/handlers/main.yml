@@ -5,3 +5,6 @@
 
 - name: restart cron
   service: name=cronie state=restarted
+
+- name: restart firewall
+  service: name=iptables state=restarted

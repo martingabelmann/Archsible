@@ -7,3 +7,8 @@
     - sshd
     - autoupdate
 
+- name: firewall
+  hosts: all
+  roles:
+      - firewall
+  tags: firewall

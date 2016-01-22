@@ -1,0 +1,8 @@
+---
+
+- name: enable iptables daemon
+  service: name=iptables state=started enabled=yes
+
+- name: copy rules
+  template: src=iptables.rules dest=/etc/iptables/iptables.rules
+  notify: restart firewall
