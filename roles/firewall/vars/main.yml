@@ -6,6 +6,10 @@ rules:
       protocol: 'tcp'
       source: '{{ internal_subnet }}'
       port: '22'
+    munin:
+      protocol: 'tcp'
+      source: '{{ munin_ip }}'
+      port: '4949'
   server:
     cnload:
       protocol: 'tcp'
