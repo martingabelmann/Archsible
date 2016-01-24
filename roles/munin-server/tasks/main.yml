@@ -1,0 +1,7 @@
+---
+
+- name: install munin-server
+  pacman: name=munin state=present
+
+- name: copy config
+  template: src=munin.conf dest=/etc/munin/munin.conf

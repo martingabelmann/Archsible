@@ -8,9 +8,14 @@
     - sshd
     - autoupdate
 
-
 - name: firewall
   hosts: all
   roles:
       - firewall
   tags: firewall
+
+- name: munin-server
+  hosts: t60
+  roles:
+      - munin-server
+  tags: munin-server 
