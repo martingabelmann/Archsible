@@ -1,0 +1,8 @@
+---
+
+- name: install apache
+  pacman: name=apache state=present
+
+- name: enable apache
+  service: name=httpd state=started enabled=yes
+    
