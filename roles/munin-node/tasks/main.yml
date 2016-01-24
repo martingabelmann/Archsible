@@ -1,0 +1,11 @@
+---
+
+- name: install munin-node
+  pacman: name=munin-node state=present
+
+- name: copy config
+  template: src=munin-node.conf dest=/etc/munin/munin-node.conf
+  notify: restart munin-node
+
+- name: enable munin-node
+  service: name=munin-node state=started enabled=yes

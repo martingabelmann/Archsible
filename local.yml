@@ -4,9 +4,9 @@
   hosts: all
   roles: 
     - { role: packages, tags: ['packages'] }
+    - { role: munin-node, tags: ['munin-node'] }
     - sshd
     - autoupdate
-
 
 
 - name: firewall
