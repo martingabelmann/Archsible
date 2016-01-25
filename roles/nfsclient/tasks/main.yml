@@ -1,0 +1,11 @@
+---
+
+- name: install nfs
+  pacman: name=nfs-utils state=present
+
+- name: enable nfs related daemons
+  service: name={{ item }} state=started enabled=yes
+  with_items: 
+    - rpcbind.service
+    - nfs-client.target
+    - remote-fs.target

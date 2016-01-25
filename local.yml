@@ -5,6 +5,7 @@
   roles: 
     - { role: packages, tags: ['packages'] }
     - { role: munin-node, tags: ['munin-node'] }
+    - { role: nfsclient, tags: ['nfsclient'] }
     - sshd
     - autoupdate
 
