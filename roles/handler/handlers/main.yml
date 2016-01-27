@@ -14,3 +14,9 @@
 
 - name: restart munin-node
   service: name=munin-node state=restarted
+
+- name: restart nfs
+  service: name=nfs-server state=restarted
+
+- name: reload exports
+  command: exportfs -rav

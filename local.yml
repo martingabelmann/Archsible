@@ -15,6 +15,13 @@
       - firewall
   tags: firewall
 
+- name: nfsserver
+  hosts: t60
+  roles:
+      - nfsserver
+  tags: nfsserver
+
+
 - name: munin-server
   hosts: t60
   roles:

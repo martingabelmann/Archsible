@@ -4,3 +4,14 @@ ansible_python_interpreter: /usr/bin/python2
 
 internal_subnet: 192.168.178.20/24
 munin_ip: 192.168.178.38
+
+default_nfs_options: "rw,no_subtree_check,nohide,root_squash"
+nfs_exports:
+    rootshare:
+        path: "/srv/export/"
+        options: "rw,fsid=root,no_subtree_check"
+        iprange: "{{ internal_subnet }}"
+    exampleshare:
+        path: "/srv/export/example"
+        options: "rw,no_subtree_check,no_root_squash"
+        iprange: "{{ internal_subnet }}"
