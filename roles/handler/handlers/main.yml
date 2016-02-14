@@ -20,3 +20,6 @@
 
 - name: reload exports
   command: exportfs -rav
+
+- name: restart dnsmasq
+  service: name=dnsmasq state=restarted

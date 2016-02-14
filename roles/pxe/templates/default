@@ -1,0 +1,24 @@
+DEFAULT harddisk
+PROMPT 1
+TIMEOUT 10
+
+label harddisk
+   localboot 0x80
+
+LABEL netboot
+MENU LABEL ArchNetboot
+KERNEL /vmlinuz
+append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}}
+
+LABEL autoinstall
+MENU LABEL ArchAutoInstall
+KERNEL /vmlinuz
+append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
+
+{% for plan in partitions %}
+LABEL part_{{ plan }}
+MENU LABEL ArchAutoInstall
+KERNEL /vmlinuz
+append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
+{% endfor %}
+

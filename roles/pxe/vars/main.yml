@@ -1,0 +1,20 @@
+---
+pxe_tftpdir: "/srv/tftp"
+pxe_mirror: "http://mirror.rackspace.com/archlinux/iso/latest/"
+pxe_chown: "root"
+pxe_chmod: "0755"
+pxe_chgrp: "root"
+pxe_script: ""
+
+partitions:
+    laptop:
+        swap: 2G
+        sda:
+            arch: 50G
+    ultrabay: 
+        swap: 2G
+        sda:
+            arch: max
+        sdb:
+            home: max
+

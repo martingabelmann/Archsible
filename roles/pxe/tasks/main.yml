@@ -1,0 +1,35 @@
+---
+
+- name: install dnsmasq
+  pacman: name=dnsmasq state=present
+
+- name: create tftp dirs
+  file: "path={{item}} state=directory owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
+  with_items:
+      - "{{pxe_tftpdir}}"
+      - "{{pxe_tftpdir}}/i686"
+      - "{{pxe_tftpdir}}/x86_64"
+      - "{{pxe_tftpdir}}/pxelinux.cfg"
+
+- name: download latest x32 archiso and kernel
+  get_url: "url={{item}} dest={{pxe_tftpdir}}/i686/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
+  with_items:
+      - "{{pxe_mirror}}/arch/boot/i686/archiso.img"
+      - "{{pxe_mirror}}/arch/boot/i686/vmlinuz"
+  notify: restart dnsmasq
+
+- name: download latest x64 archiso and kernel
+  get_url: "url={{item}} mode={{pxe_chown}} dest={{pxe_tftpdir}}/x86_64/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}" 
+  with_items:
+      - "{{pxe_mirror}}/arch/boot/x86_64/archiso.img"
+      - "{{pxe_mirror}}/arch/boot/x86_64/vmlinuz"
+  notify: restart dnsmasq
+
+- name: copy boot menu
+  template: "src=default dest={{pxe_tftpdir}}/pxelinux.cfg/default owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
+  notify: restart dnsmasq
+
+- name: start and enable dnsmasq
+  service: name=dnsmasq state=started enabled=yes
+
+

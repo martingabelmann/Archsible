@@ -21,9 +21,16 @@
       - nfsserver
   tags: nfsserver
 
-
 - name: munin-server
   hosts: t60
   roles:
       - munin-server
   tags: munin-server 
+
+- name: pxe
+  hosts: t60
+  roles:
+      - pxe
+  tags: pxe
+
+
