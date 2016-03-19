@@ -61,7 +61,19 @@ mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}}
 {% endfor -%}
     fi
     {% endfor -%}
-
+    genfstab -Lp /mnt > /mnt/etc/fstab
+    pacstrap /mnt base base-devel ansible
+    function archchroot {
+        arch-chroot /mnt/ /bin/bash -c "$1"
+    }
+    archchroot "grep -E -A 1 \".*Germany.*$\" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist"
+    archchroot "mkinitcpio -p linux"
+    archchroot "pacman -S syslinux"
+    archchroot "sed -i 's/sda3/sda1/g' /boot/syslinux/syslinux.cfg"
+    archchroot "syslinux-install_update -iam"
+    archchroot "echo root:{% include "passwd" %}| chpasswd"
+    archchroot "mkdir /var/lib/anisble"
+    archchroot "/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_repo_url}} >> /var/log/install.log"
 fi
 
 
