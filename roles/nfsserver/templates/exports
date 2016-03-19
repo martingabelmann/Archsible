@@ -1,0 +1,20 @@
+{% if nfs_exports is defined %}
+{%    for share in nfs_exports %}
+{%        set export = [] %} 
+{%        if share['iprange'] is defined %}
+{%            set _ = export.append(share['iprange']) %}
+{%        else %}
+{%            set _ = export.append(internal_subnet) %}
+{%        endif %}
+{%        if share['options'] is defined %}
+{%            set _ = export.append(share['options']) %}
+{%        else %}
+{%            set _ = export.append(default_nfs_options) %}
+{%        endif %}
+{%        if share['path'] is defined %}
+{%            set _ = export.append(share['path']) %}
+{{            "{2} {0}({1})".format(*export) }}
+{%        endif %}
+{%    endfor %}
+{% endif %}
+

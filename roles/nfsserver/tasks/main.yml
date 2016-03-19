@@ -1,0 +1,13 @@
+---
+- name: create exported dirs
+  file: path={{item.path}} state=directory recurse=yes
+  with_items: "{{nfs_exports}}"
+
+- name: start nfs server
+  service: name=nfs-server state=started enabled=yes
+
+- name: copy exports
+  template: src=exports dest=/etc/exports
+  notify: 
+    - restart nfs
+    - reload exports

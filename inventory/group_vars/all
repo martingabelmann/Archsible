@@ -8,13 +8,14 @@ munin_ip: 192.168.178.29
 ansible_repo_url: setme
 
 default_nfs_options: "rw,no_subtree_check,nohide,root_squash"
+
 nfs_exports:
-    rootshare:
-        path: "/srv/export/"
-        options: "rw,fsid=root,no_subtree_check"
-        iprange: "{{ internal_subnet }}"
-    exampleshare:
-        path: "/srv/export/example"
-        options: "rw,no_subtree_check,no_root_squash"
-        iprange: "{{ internal_subnet }}"
+    - name: rootshare
+      path: "/srv/export/"
+      options: "rw,fsid=root,no_subtree_check"
+      iprange: "{{ internal_subnet }}"
+    - name: exampleshare
+      path: "/srv/export/example"
+      options: "rw,no_subtree_check,no_root_squash"
+      iprange: "{{ internal_subnet }}"
 
