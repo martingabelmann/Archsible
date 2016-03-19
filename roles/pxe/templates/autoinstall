@@ -1,0 +1,68 @@
+#!/bin/bash
+
+mount -o remount,size=1G /run/archiso/cowspace
+
+if [ "$#" -ne 1 ]
+then
+    pacman --noconfirm -Sy tmux
+    tmux new-session -d -s install
+    tmux send-keys -t install "${0} install" 'C-m'
+fi
+
+if  [ "$1" == "install" ]
+then
+    # setup ssh
+    pacman --noconfirm -S openssh sshpass parted
+    echo root:install | chpasswd
+    systemctl start sshd
+    
+    # parse kernel args for install options
+    for param in $(< /proc/cmdline); do 
+        [[ "${param%%=*}" = "partition_plan" ]] && plan="${param#*=}"
+    done
+
+    # various partition plans
+    {% for plan in partition_plans %}
+    if [[ "$plan" = {{ plan }} ]]
+    then
+{% for device in partition_plans[plan] %}
+{% for partition in partition_plans[plan][device] %}
+echo "n
+{{partition.type}}
+{{partition.number}}
+
+{{partition.lsector}}
+{% if partition.bootable -%}
+a
+{% if not loop.first -%}
+{{partition.number}}
+{% endif -%}
+{% endif -%}
+t
+{% if not loop.first -%}
+{{partition.number}}
+{% endif -%}
+{{partition.typehex}}
+w
+q
+"|fdisk /dev/{{device}}
+sleep 2
+partprobe /dev/{{device}}
+{% if partition.mkfs == "swap" -%}
+mkswap -L swap /dev/{{device}}{{partition.number}}
+swapon -L swap
+{% else -%}
+mkfs.{{partition.mkfs}} -L {{partition.label}} /dev/{{device}}{{partition.number}}
+{% if partition.mount -%}
+mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 
+{% endif %}
+{% endif -%}
+{% endfor -%}
+{% endfor -%}
+    fi
+    {% endfor -%}
+
+fi
+
+
+

@@ -4,17 +4,17 @@ pxe_mirror: "http://mirror.rackspace.com/archlinux/iso/latest/"
 pxe_chown: "root"
 pxe_chmod: "0755"
 pxe_chgrp: "root"
-pxe_script: ""
+pxe_script: "autoinstall"
 
-partitions:
-    laptop:
-        swap: 2G
+partition_plans:
+    root:
         sda:
-            arch: 50G
-    ultrabay: 
-        swap: 2G
+            - { label: arch, type: p, lsector: +50G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
+            - { label: swap, type: e, lsector: +2G, number: 2, bootable: false, mkfs: swap, typehex: 82, mount: false }
+    extrahome: 
         sda:
-            arch: max
+            - { label: arch, type: p, lsector: +50G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
+            - { label: swap, type: e, lsector: +2G, number: 2, bootable: false, mkfs: swap, typehex: 82, mount: false }
         sdb:
-            home: max
-
+            - { label: home, type: p, lsector: "", number: 1, bootable: false, mkfs: ext4, typehex: 83, mount: /home }
+ 

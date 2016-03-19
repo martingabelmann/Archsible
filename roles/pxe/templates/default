@@ -15,7 +15,7 @@ MENU LABEL ArchAutoInstall
 KERNEL /vmlinuz
 append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
 
-{% for plan in partitions %}
+{% for plan in partition_plans %}
 LABEL part_{{ plan }}
 MENU LABEL ArchAutoInstall
 KERNEL /vmlinuz

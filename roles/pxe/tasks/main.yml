@@ -29,6 +29,9 @@
   template: "src=default dest={{pxe_tftpdir}}/pxelinux.cfg/default owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
   notify: restart dnsmasq
 
+- name: copy autoinstall
+  template: "src=autoinstall dest={{pxe_tftpdir}}/{{pxe_script}}"
+
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes
 
