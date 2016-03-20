@@ -68,7 +68,7 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     grep -E -A 1 '.*Germany.*$' /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
     pacman -Sy 
-    pacstrap /mnt base base-devel ansible
+    pacstrap /mnt base base-devel git python ansible
     genfstab -Lp /mnt > /mnt/etc/fstab
     function archchroot {
         arch-chroot /mnt /bin/bash -c "$1"
