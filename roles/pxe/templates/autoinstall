@@ -65,14 +65,17 @@ mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}}
 {% endfor -%}
     fi
     {% endfor -%}
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    grep -E -A 1 '.*Germany.*$' /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
+    pacman -Sy 
     pacstrap /mnt base base-devel ansible
     genfstab -Lp /mnt > /mnt/etc/fstab
     function archchroot {
         arch-chroot /mnt /bin/bash -c "$1"
     }
-    archchroot "grep -E -A 1 \".*Germany.*$\" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist"
+    archchroot "pacman -Sy"
     archchroot "mkinitcpio -p linux"
-    archchroot "pacman -S syslinux"
+    archchroot "pacman --noconfirm -S syslinux"
     archchroot "sed -i 's/sda3/sda1/g' /boot/syslinux/syslinux.cfg"
     archchroot "syslinux-install_update -iam"
     archchroot "echo root:{% include "passwd" %}| chpasswd"
