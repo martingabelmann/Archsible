@@ -58,7 +58,7 @@ swapon -L swap
 mkfs.{{partition.mkfs}} -L {{partition.label}} /dev/{{device}}{{partition.number}}
 sleep 1
 {% if partition.mount -%}
-mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 
+mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 
 {% endif %}
 {% endif -%}
 {% endfor -%}
