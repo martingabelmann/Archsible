@@ -26,7 +26,9 @@ then
     if [[ "$plan" = {{ plan }} ]]
     then
 {% for device in partition_plans[plan] %}
+dd if=/dev/zero bs=512 count=512 of=/dev/{{device}}
 {% for partition in partition_plans[plan][device] %}
+dd if=/dev/zero bs=512 count=512 of=/dev/{{device}}{{partition.number}}
 echo "n
 {{partition.type}}
 {{partition.number}}
@@ -50,9 +52,11 @@ sleep 2
 partprobe /dev/{{device}}
 {% if partition.mkfs == "swap" -%}
 mkswap -L swap /dev/{{device}}{{partition.number}}
+sleep 1
 swapon -L swap
 {% else -%}
 mkfs.{{partition.mkfs}} -L {{partition.label}} /dev/{{device}}{{partition.number}}
+sleep 1
 {% if partition.mount -%}
 mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 
 {% endif %}
@@ -61,10 +65,10 @@ mount /dev/{{device}}{{partition.number}} /mnt{{partition.mount}}
 {% endfor -%}
     fi
     {% endfor -%}
-    genfstab -Lp /mnt > /mnt/etc/fstab
     pacstrap /mnt base base-devel ansible
+    genfstab -Lp /mnt > /mnt/etc/fstab
     function archchroot {
-        arch-chroot /mnt/ /bin/bash -c "$1"
+        arch-chroot /mnt /bin/bash -c "$1"
     }
     archchroot "grep -E -A 1 \".*Germany.*$\" /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist"
     archchroot "mkinitcpio -p linux"
