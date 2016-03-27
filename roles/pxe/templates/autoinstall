@@ -89,6 +89,7 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
     hostname=${hostname%?}
     shortname=$(echo "$hostname"|cut -d '.' -f1)
     echo "$ip    $hostname  $shortname" >> /mnt/etc/hosts
+    echo "$shortname" > /mnt/etc/hostname
 
     # set us locale
     sed -i 's/#en_US/en_US/g' /mnt/etc/locale.gen
