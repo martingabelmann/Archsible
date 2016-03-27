@@ -84,7 +84,7 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
     archchroot "syslinux-install_update -iam"
 
     # set hostname
-    ip=ip -o -f inet addr|awk '{print $4}'|cut -f1 -d '/'|sed 's/127.0.0.1//g'|tr -d '\n'
+    ip=$(ip -o -f inet addr|awk '{print $4}'|cut -f1 -d '/'|sed 's/127.0.0.1//g'|tr -d '\n')
     hostname=$(nslookup "$ip" {{dnsserver['ip']}}|awk -F= '{print $2}'|tr -d '\n'|tr -d ' ')
     hostname=${hostname%?}
     shortname=$(echo "$hostname"|cut -d '.' -f1)
