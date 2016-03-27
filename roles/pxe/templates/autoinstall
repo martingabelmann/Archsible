@@ -26,9 +26,11 @@ then
     if [[ "$plan" = {{ plan }} ]]
     then
 {% for device in partition_plans[plan] %}
-dd if=/dev/zero bs=512 count=512 of=/dev/{{device}}
 {% for partition in partition_plans[plan][device] %}
-dd if=/dev/zero bs=512 count=512 of=/dev/{{device}}{{partition.number}}
+echo "d
+{{partition.number}}
+w
+"|fdisk /dev/{{device}}
 echo "n
 {{partition.type}}
 {{partition.number}}
@@ -46,7 +48,6 @@ t
 {% endif -%}
 {{partition.typehex}}
 w
-q
 "|fdisk /dev/{{device}}
 sleep 2
 partprobe /dev/{{device}}
@@ -115,5 +116,4 @@ fi
 
 
 #TODO 
-# swap funktioniert nicht
 # hostname setzten
