@@ -63,7 +63,7 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
 {% endif %}
 {% endif -%}
 {% if partition.bootable -%}
-BOOT_PART="/dev/{{device}}{{partition.number}}"
+BOOT_PART="{{device}}{{partition.number}}"
 {% endif -%}
 {% endfor -%}
 {% endfor -%}
