@@ -1,7 +1,7 @@
 ---
 
 - name: copy autoupdate
-  copy: src=autoupdate dest=/etc/cron.daily/autoupdate owner=root group=root mode="u=rwx,g=r,o=r"
+  template: src=autoupdate dest=/etc/cron.daily/autoupdate owner=root group=root mode="u=rwx,g=r,o=r"
 
 - name: copy logrotate
   copy: src=logrotate dest=/etc/logrotate.d/autoupdate owner=root group=root mode="u=rw,g=r,o=r"
