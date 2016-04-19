@@ -62,6 +62,9 @@ sleep 1
 mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 
 {% endif %}
 {% endif -%}
+{% if partition.bootable -%}
+BOOT_PART="/dev/{{device}}{{partition.number}}"
+{% endif -%}
 {% endfor -%}
 {% endfor -%}
     fi
@@ -80,7 +83,7 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
     
     # install syslinux bootloader
     archchroot "pacman --noconfirm -S syslinux"
-    sed -i 's/sda3/sda1/g' /mnt/boot/syslinux/syslinux.cfg
+    sed -i "s/sda3/$BOOT_PART/g" /mnt/boot/syslinux/syslinux.cfg
     archchroot "syslinux-install_update -iam"
 
     # set hostname
