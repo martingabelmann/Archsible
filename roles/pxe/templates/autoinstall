@@ -102,18 +102,18 @@ mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.
     mkdir -p /mnt/etc/ansible/group_vars
     echo 'ansible_python_interpreter: /usr/bin/python2' >> /mnt/etc/ansible/group_vars/all
     mkdir /mnt/var/lib/ansible
-    echo -e "[Unit]
-    Description=run ansible-pull on startup
-    After=network.target
-    
-    [Service]
-    Type=oneshot
-    User=root
-    ExecStart=/bin/bash -c '/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_repo_url}} >> /var/log/ansible-pull.log 2>&1'
+echo -e "[Unit]
+Description=run ansible-pull on startup
+After=network.target
 
-    [Install]
-    WantedBy=multi-user.target
-    " >> /mnt/etc/systemd/system/ansible_pull.service
+[Service]
+Type=oneshot
+User=root
+ExecStart=/bin/bash -c '/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_repo_url}} >> /var/log/ansible-pull.log 2>&1'
+
+[Install]
+WantedBy=multi-user.target
+" >> /mnt/etc/systemd/system/ansible_pull.service
     archchroot "systemctl enable ansible_pull.service"
     
     # enable network manager
