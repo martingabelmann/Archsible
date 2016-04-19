@@ -56,7 +56,7 @@ mkswap -L swap /dev/{{device}}{{partition.number}}
 sleep 1
 swapon -L swap
 {% else -%}
-mkfs.{{partition.mkfs}} -L {{partition.label}} /dev/{{device}}{{partition.number}}
+echo "y"|mkfs.{{partition.mkfs}} -L {{partition.label}} /dev/{{device}}{{partition.number}}
 sleep 1
 {% if partition.mount -%}
 mount -t {{partition.mkfs}} /dev/{{device}}{{partition.number}} /mnt{{partition.mount}} 

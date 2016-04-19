@@ -23,7 +23,7 @@
   tags: munin-server 
 
 - name: pxe
-  hosts: t60
+  hosts: archy
   roles:
       - pxe
   tags: pxe
