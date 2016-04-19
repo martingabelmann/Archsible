@@ -1,14 +1,14 @@
 ---
 
 - name: install common packages
-  pacman: name={{ item }} state={{ packages_state }}
-  with_items: common_packages
+  pacman: "name={{ item }} state={{ packages_state }}"
+  with_items: "{{common_packages}}"
 
 - name: install xpackages
-  pacman: name={{ item }} state={{ packages_state }}
-  with_items: xpackages
+  pacman: "name={{ item }} state={{ packages_state }}"
+  with_items: "{{xpackages}}"
   when: "'server' not in group_names"
 
 - name: enable common service
-  service: name={{ item }} state=started enabled=yes
-  with_items: enabled_services
+  service: "name={{ item }} state=started enabled=yes"
+  with_items: "{{enabled_services}}"

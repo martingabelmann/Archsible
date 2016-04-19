@@ -6,14 +6,9 @@
     - { role: packages, tags: ['packages'] }
     - { role: munin-node, tags: ['munin-node'] }
     - { role: nfsclient, tags: ['nfsclient'] }
-    - sshd
-    - autoupdate
-
-- name: firewall
-  hosts: all
-  roles:
-      - firewall
-  tags: firewall
+    - { role: sshd, tags: ['ssh'] }
+    - { role: autoupdate, tags: ['autoupdate'] }
+    - { role: firewall, tags: ['firewall'] }
 
 - name: nfsserver
   hosts: t60
