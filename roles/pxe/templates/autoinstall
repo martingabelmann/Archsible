@@ -13,7 +13,7 @@ if  [ "$1" == "install" ]
 then
     # setup ssh
     pacman --noconfirm -S openssh sshpass parted
-    echo root:install | chpasswd
+    echo root:{% include "passwd" %} | chpasswd
     systemctl start sshd
     
     # parse kernel args for install options
