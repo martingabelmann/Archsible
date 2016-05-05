@@ -13,6 +13,7 @@ enabled_services:
 common_packages:
     - alsa-utils
     - cups
+    - cronie
     - openssh
     - openssl
     - sshpass
@@ -77,6 +78,7 @@ xpackages:
     - xorg-server
     - xorg-server-common
     - xorg-server-utils
+    - xorg-server-xinit
     - awesome
     - vlc
     - luakit
