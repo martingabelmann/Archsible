@@ -69,6 +69,19 @@ BOOT_PART="{{device}}{{partition.number}}"
 {% endfor -%}
     fi
     {% endfor -%}
+    if [[ "$plan" = "part_manual" ]]
+    then
+        echo -e 'You`ve booted into the interactive (partition) mode.\n\n
+        * Do your specific partitioning using [c]fdisk 
+        * create filesystems e.g.  using mkfs.ext4 -L label /dev/sdXn 
+        * set the booting device variable for syslinux in the /tmp/bootdev file: echo "BOOT_PART=/dev/sdXn" >> /tmp/bootdev
+        * mount the root partition with "mount /dev/sdXn /mnt"
+        * exit the shell with crtl+d\n 
+        The installation will proceed then..\n'
+        bash -c "exec zsh"
+        source /tmp/bootdev
+        echo -e '\n Exit interavtive mode proceeding with automatic installation..\n'
+    fi
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     grep -E -A 1 '.*Germany.*$' /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
     pacman -Sy 

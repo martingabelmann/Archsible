@@ -22,3 +22,14 @@ KERNEL /vmlinuz
 append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
 {% endfor %}
 
+
+LABEL part_manual
+MENU LABEL ArchAutoInstall
+KERNEL /vmlinuz
+append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan=part_manual
+
+LABEL part_manualx32
+MENU LABEL ArchAutoInstall
+KERNEL /vmlinuzx32
+append ip=dhcp checksum=y initrd=/archiso32.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan=part_manual
+
