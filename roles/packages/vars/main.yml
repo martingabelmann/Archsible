@@ -78,7 +78,7 @@ xpackages:
     - xorg-server
     - xorg-server-common
     - xorg-server-utils
-    - xorg-server-xinit
+    - xorg-xinit
     - awesome
     - vlc
     - luakit
