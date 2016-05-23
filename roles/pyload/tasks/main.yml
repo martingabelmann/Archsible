@@ -1,0 +1,30 @@
+---
+
+- name: create the pyload in the users group to be able to read its files
+  user: name=pyload uid=9666 group=users
+
+- name: create dirs
+  file: path={{item}} state=directory owner=pyload mode="u=rwx,g=rwx,o-rwx"
+  with_items:
+      - /srv/docker/pyload
+      - /srv/docker/pyload/conf
+      - /srv/docker/pyload/dl
+
+- name: copy config template
+  template: src=pyload.conf dest=/srv/docker/pyload/
+
+
+- name: run pyload
+  docker:
+      name: pyload
+      image: martingabelmann/pyload
+      state: reloaded
+      pull: always
+      restart_policy: always
+      restart_policy_retry: 30
+      volumes:
+          - /srv/docker/pyload/conf:/conf
+          - /srv/docker/pyload/dl:/dl
+      ports:
+          - "9666:9666"
+          - "80:8000"
