@@ -73,6 +73,7 @@ common_packages:
     - zsh
     - zsh-completions
     - zsh-syntax-highlighting
+    - the_silver_searcher
 
 xpackages:
     - xorg-server
