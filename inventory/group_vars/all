@@ -9,7 +9,9 @@ dnsserver:
     name: htpc
     ip: 192.168.178.29
 
-ansible_repo_url: setme
+ansible_repo: 
+    url: setme
+    branch: master
 
 default_nfs_options: "rw,no_subtree_check,nohide,root_squash"
 

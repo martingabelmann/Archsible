@@ -125,7 +125,7 @@ After=network.target
 [Service]
 Type=oneshot
 User=root
-ExecStart=/bin/bash -c '/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_repo_url}} >> /var/log/ansible-pull.log 2>&1'
+ExecStart=/bin/bash -c '/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_repo['url']}} -C {{ansible_repo['branch']}} >> /var/log/ansible-pull.log 2>&1'
 
 [Install]
 WantedBy=multi-user.target
