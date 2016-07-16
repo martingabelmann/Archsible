@@ -1,30 +1,29 @@
 ---
 
+default_source: '{{ internal_subnet }}'
+default_dest: '0.0.0.0/0'
+
 rules:
   all:
     ssh:
       protocol: 'tcp'
-      source: '{{ internal_subnet }}'
       port: '22'
+      source: '{{ internal_subnet }}'
+      dest: '0.0.0.0/0'
     munin:
       protocol: 'tcp'
-      source: '{{ munin_ip }}'
       port: '4949'
   pyload:
     cnload:
       protocol: 'tcp'
-      source: '{{ internal_subnet }}'
       port: '9996'
     pyload:
       protocol: 'tcp'
-      source: '{{ internal_subnet }}'
       port: '9999'
   pxe:
     tftpd:
       protocol: 'udp'
-      source: '{{ internal_subnet }}'
       port: '69'
     http:
       protocol: 'tcp'
-      source: '{{ internal_subnet }}'
       port: '80'

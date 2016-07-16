@@ -20,7 +20,7 @@
 {% for group in group_names, "all" %}
 {%    if rules[group] is defined %}
 {%        for rule in rules[group] %}
--A {{ rules[group][rule]['protocol']|upper }} -s {{ rules[group][rule]['source']|default('0.0.0.0/0') }} -d {{ rules[group][rule]['dest']|default('0.0.0.0/0') }} -p {{ rules[group][rule]['protocol']|lower }} -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m {{ rules[group][rule]['protocol']|lower }} --dport {{ rules[group][rule]['port'] }} -j ACCEPT
+-A {{ rules[group][rule]['protocol']|upper }} -s {{ rules[group][rule]['source']|default(default_source) }} -d {{ rules[group][rule]['dest']|default(default_dest) }} -p {{ rules[group][rule]['protocol']|lower }} -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m {{ rules[group][rule]['protocol']|lower }} --dport {{ rules[group][rule]['port'] }} -j ACCEPT
 {%        endfor %}
 {%     endif %}
 {% endfor %}
