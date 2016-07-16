@@ -8,7 +8,8 @@
 
 - name: enable nfs related daemons
   service: name={{ item }} state=started enabled=yes
+  ignore_errors: true
   with_items: 
-    - rpcbind.service
     - nfs-client.target
     - remote-fs.target
+    - rpcbind.service
