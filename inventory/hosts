@@ -5,12 +5,16 @@ raspberry
 [laptops]
 t60 
 
-
 [desktops]
 tower
+
+
 
 [pyload]
 htpc
 
 [pxe]
+htpc
+
+[nfsserver]
 htpc
