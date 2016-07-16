@@ -18,3 +18,7 @@ htpc
 
 [nfsserver]
 htpc
+
+[munin-server]
+raspberry
+

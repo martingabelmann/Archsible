@@ -27,3 +27,7 @@ rules:
     http:
       protocol: 'tcp'
       port: '80'
+  munin-server:
+    http:
+      protocol: 'tcp'
+      port: '80'

@@ -26,9 +26,10 @@
   tags: pyload
 
 - name: munin-server
-  hosts: htpc
+  hosts: munin-server
   roles:
       - munin-server
+      - firewall
   tags: munin-server 
 
 - name: pxe
