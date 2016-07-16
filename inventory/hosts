@@ -11,3 +11,6 @@ tower
 
 [pyload]
 htpc
+
+[pxe]
+htpc

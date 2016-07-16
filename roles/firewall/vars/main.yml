@@ -19,4 +19,12 @@ rules:
       protocol: 'tcp'
       source: '{{ internal_subnet }}'
       port: '9999'
- 
+  pxe:
+    tftpd:
+      protocol: 'udp'
+      source: '{{ internal_subnet }}'
+      port: '69'
+    http:
+      protocol: 'tcp'
+      source: '{{ internal_subnet }}'
+      port: '80'
