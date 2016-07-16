@@ -9,6 +9,7 @@
     - { role: sshd, tags: ['ssh'] }
     - { role: autoupdate, tags: ['autoupdate'] }
     - { role: firewall, tags: ['firewall'] }
+  tags: common
 
 - name: nfsserver
   hosts: nfsserver
