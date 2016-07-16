@@ -1,15 +1,11 @@
 [servers]
 htpc
-rasp
+raspberry
 
 [laptops]
 t60 
-talap
+
 
 [desktops]
-archy
+tower
 
-[arch]
-t60
-talap
-archy

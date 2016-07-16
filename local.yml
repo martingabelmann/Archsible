@@ -11,21 +11,20 @@
     - { role: firewall, tags: ['firewall'] }
 
 - name: nfsserver
-  hosts: t60
+  hosts: htpc
   roles:
       - nfsserver
   tags: nfsserver
 
 - name: munin-server
-  hosts: t60
+  hosts: htpc
   roles:
       - munin-server
   tags: munin-server 
 
 - name: pxe
-  hosts: archy
+  hosts: raspberry
   roles:
       - pxe
   tags: pxe
-
 
