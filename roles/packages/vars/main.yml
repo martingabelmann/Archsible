@@ -71,8 +71,6 @@ common_packages:
     - sudo
     - tcpdump
     - wget
-    - xterm 
-    - xfce4-terminal
     - zsh
     - zsh-completions
     - zsh-syntax-highlighting
@@ -80,6 +78,8 @@ common_packages:
  
 xpackages:
     - xorg-server
+    - xterm 
+    - xfce4-terminal
     - xorg-server-common
     - xorg-server-utils
     - xorg-xinit
