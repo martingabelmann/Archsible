@@ -16,6 +16,12 @@
       - nfsserver
   tags: nfsserver
 
+- name: pyload
+  hosts: pyload
+  roles:
+      - pyload
+  tags: pyload
+
 - name: munin-server
   hosts: htpc
   roles:

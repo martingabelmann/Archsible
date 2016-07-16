@@ -10,7 +10,7 @@ rules:
       protocol: 'tcp'
       source: '{{ munin_ip }}'
       port: '4949'
-  server:
+  pyload:
     cnload:
       protocol: 'tcp'
       source: '{{ internal_subnet }}'
