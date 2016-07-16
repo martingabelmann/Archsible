@@ -1,5 +1,9 @@
 ---
 
+- name: include secret passwords
+  include_vars: "secret.yml"
+  no_log: true
+
 - name: install dnsmasq
   pacman: name=dnsmasq state=present
 

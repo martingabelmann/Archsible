@@ -112,7 +112,7 @@ BOOT_PART="{{device}}{{partition.number}}"
     archchroot "locale-gen"
     
     # set root password
-    archchroot "echo root:{% include "passwd" %}| chpasswd"
+    archchroot "echo root:{{root_password}}| chpasswd"
     
     # configure ansible
     mkdir -p /mnt/etc/ansible/group_vars
