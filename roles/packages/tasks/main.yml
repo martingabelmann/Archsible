@@ -7,7 +7,7 @@
 - name: install xpackages
   pacman: "name={{ item }} state={{ packages_state }}"
   with_items: "{{xpackages}}"
-  when: "'server' not in group_names"
+  when: "'servers' not in group_names"
 
 - name: enable common service
   service: "name={{ item }} state=started enabled=yes"
