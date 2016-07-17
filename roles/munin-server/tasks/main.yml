@@ -14,5 +14,5 @@
   notify: restart apache
 
 - name: enable vhost
-  lineinfile: dest=/etc/httpd/conf/httpd.conf line="Include conf/extra/munin-vhost.conf" 
+  lineinfile: dest=/etc/httpd/conf/httpd.conf line="Include conf/extra/munin-vhost.conf"
   notify: restart apache

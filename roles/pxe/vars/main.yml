@@ -11,10 +11,9 @@ partition_plans:
         sda:
             - { label: arch, type: p, lsector: +50G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
             - { label: swap, type: e, lsector: +2G, number: 2, bootable: false, mkfs: swap, typehex: 82, mount: false }
-    extrahome: 
+    extrahome:
         sda:
             - { label: arch, type: p, lsector: +50G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
             - { label: swap, type: e, lsector: +2G, number: 2, bootable: false, mkfs: swap, typehex: 82, mount: false }
         sdb:
             - { label: home, type: p, lsector: "", number: 1, bootable: false, mkfs: ext4, typehex: 83, mount: /home }
- 

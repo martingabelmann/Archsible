@@ -23,7 +23,7 @@
   notify: restart dnsmasq
 
 - name: download latest x64 archiso and kernel
-  get_url: "url={{item}} mode={{pxe_chown}} dest={{pxe_tftpdir}}/x86_64/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}" 
+  get_url: "url={{item}} mode={{pxe_chown}} dest={{pxe_tftpdir}}/x86_64/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
   with_items:
       - "{{pxe_mirror}}/arch/boot/x86_64/archiso.img"
       - "{{pxe_mirror}}/arch/boot/x86_64/vmlinuz"
@@ -38,5 +38,3 @@
 
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes
-
-

@@ -5,5 +5,3 @@
 
 - name: copy logrotate
   copy: src=logrotate dest=/etc/logrotate.d/autoupdate owner=root group=root mode="u=rw,g=r,o=r"
-
-

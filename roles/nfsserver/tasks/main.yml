@@ -8,6 +8,6 @@
 
 - name: copy exports
   template: src=exports dest=/etc/exports
-  notify: 
+  notify:
     - restart nfs
     - reload exports

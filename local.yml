@@ -2,7 +2,7 @@
 
 - name: common plays for everyone
   hosts: all
-  roles: 
+  roles:
     - { role: packages, tags: ['packages'] }
     - { role: munin-node, tags: ['munin-node'] }
     - { role: nfsclient, tags: ['nfsclient'] }
@@ -30,7 +30,7 @@
   roles:
       - munin-server
       - firewall
-  tags: munin-server 
+  tags: munin-server
 
 - name: pxe
   hosts: pxe
@@ -38,4 +38,3 @@
       - pxe
       - firewall
   tags: pxe
-
