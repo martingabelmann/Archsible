@@ -1,0 +1,12 @@
+extends: relaxed
+
+rules:
+  braces: {level: error}
+  brackets: {level: error}
+  colons: {max-spaces-after: -1, level: error}
+  commas: {max-spaces-after: -1, level: error}
+  empty-lines: {max: 3, level: warning}
+  trailing-spaces: {level: warning}
+  hyphens: {level: error}
+  indentation: disable
+  line-length: disable
