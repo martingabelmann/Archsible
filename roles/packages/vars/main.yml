@@ -26,6 +26,7 @@ common_packages:
     - acpi
     - munin-node
     - gcc
+    - gutenprint
     - make
     - python
     - python-packaging
