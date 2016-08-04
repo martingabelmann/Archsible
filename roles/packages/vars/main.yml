@@ -23,6 +23,7 @@ common_packages:
     - vim
     - tmux
     - mosh
+    - sane
     - acpi
     - munin-node
     - gcc
@@ -85,6 +86,7 @@ xpackages:
     - xorg-server-utils
     - xorg-xinit
     - awesome
+    - simple-scan
     - vlc
     - luakit
     - inkscape
