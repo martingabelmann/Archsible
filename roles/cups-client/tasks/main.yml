@@ -1,0 +1,14 @@
+---
+
+- name: install sane for shared scanners
+  pacman: name=sane state=present
+
+# /etc/profile is also sourced by zsh/csh
+- name: set cups server in profile file
+  lineinfile: dest=/etc/profile line="export CUPS_SERVER={{item}}"
+  with_items: "{{ groups['cups-server'] }}"
+
+- name: configure sane to use shared scanners
+  lineinfile: dest=/etc/sane.d/net.conf line="{{item}}"
+  with_items: "{{ groups['cups-server'] }}"
+  notify: restart sane

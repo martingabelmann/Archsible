@@ -8,6 +8,7 @@
     - { role: nfsclient, tags: ['nfsclient'] }
     - { role: sshd, tags: ['ssh'] }
     - { role: autoupdate, tags: ['autoupdate'] }
+    - { role: cups-client, tags: ['cups-client', 'cups'] }
     - { role: firewall, tags: ['firewall'] }
   tags: common
 
@@ -42,4 +43,6 @@
   hosts: cups-server
   roles:
     - cups-server
-  tags: cups-server
+  tags: 
+      - cups-server
+      - cups
