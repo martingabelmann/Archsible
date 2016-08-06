@@ -31,3 +31,7 @@ rules:
     http:
       protocol: 'tcp'
       port: '80'
+  cups-server:
+    cups:
+      protocol: 'tcp'
+      port: '631'

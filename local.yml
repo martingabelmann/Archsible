@@ -38,3 +38,8 @@
       - pxe
       - firewall
   tags: pxe
+- name: cups-server
+  hosts: cups-server
+  roles:
+    - cups-server
+  tags: cups-server

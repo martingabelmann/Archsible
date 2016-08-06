@@ -8,8 +8,6 @@ t60
 [desktops]
 tower
 
-
-
 [pyload]
 htpc
 
@@ -20,5 +18,8 @@ htpc
 htpc
 
 [munin-server]
+raspberry
+
+[cups-server]
 raspberry
 

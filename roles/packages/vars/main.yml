@@ -7,12 +7,9 @@ enabled_services:
     - sshd
     - cronie
     - munin-node
-    - cups-browsed
-
 
 common_packages:
     - alsa-utils
-    - cups
     - cronie
     - dnsutils
     - fzf
@@ -27,7 +24,6 @@ common_packages:
     - acpi
     - munin-node
     - gcc
-    - gutenprint
     - make
     - python
     - python-packaging
