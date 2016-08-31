@@ -1,0 +1,3 @@
+# run munin-cron every five minutes
+*/5 * * * *    munin /usr/bin/munin-cron
+
