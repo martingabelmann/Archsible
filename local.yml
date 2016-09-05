@@ -4,6 +4,7 @@
   hosts: all
   roles:
     - { role: packages, tags: ['packages'] }
+    - { role: system, tags: ['system'] }
     - { role: munin-node, tags: ['munin-node'] }
     - { role: nfsclient, tags: ['nfsclient'] }
     - { role: sshd, tags: ['ssh'] }
