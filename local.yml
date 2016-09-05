@@ -44,6 +44,6 @@
   hosts: cups-server
   roles:
     - cups-server
-  tags: 
+  tags:
       - cups-server
       - cups
