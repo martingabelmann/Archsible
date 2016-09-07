@@ -3,6 +3,9 @@
 - name: install sane for shared scanners
   pacman: name=sane state=present
 
+- name: install cups client libs
+  pacman: name=libcups state=present
+
 # /etc/profile is also sourced by zsh/csh
 - name: set cups server in profile file
   lineinfile: dest=/etc/profile line="export CUPS_SERVER={{item}}"
