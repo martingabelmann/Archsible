@@ -13,8 +13,10 @@ htpc
 
 [pxe]
 htpc
+raspberry
 
 [nfsserver]
+raspberry
 htpc
 
 [munin-server]
