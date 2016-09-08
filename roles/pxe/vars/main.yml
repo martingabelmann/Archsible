@@ -1,10 +1,10 @@
 ---
 pxe_tftpdir: "/srv/tftp"
-pxe_mirror: "http://mirror.rackspace.com/archlinux/iso/latest/"
+pxe_mirror: "http://{{ansible_default_ipv4['address']}}/pxe/"
 pxe_chown: "root"
 pxe_chmod: "0755"
 pxe_chgrp: "root"
-pxe_script: "http://{{ansible_fqdn}}/autoinstall"
+pxe_script: "http://{{ansible_default_ipv4['address']}}/pxe/autoinstall"
 
 partition_plans:
     root:

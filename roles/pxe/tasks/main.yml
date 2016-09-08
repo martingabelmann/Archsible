@@ -8,33 +8,61 @@
   pacman: name=dnsmasq state=present
 
 - name: create tftp dirs
-  file: "path={{item}} state=directory owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
+  file: 
+      path: "{{item}}" 
+      state: directory 
+      owner: "{{pxe_chown}}" 
+      group: "{{pxe_chgrp}}" 
+      mode: "{{pxe_chmod}}"
   with_items:
       - "{{pxe_tftpdir}}"
       - "{{pxe_tftpdir}}/i686"
       - "{{pxe_tftpdir}}/x86_64"
       - "{{pxe_tftpdir}}/pxelinux.cfg"
 
-- name: download latest x32 archiso and kernel
-  get_url: "url={{item}} dest={{pxe_tftpdir}}/i686/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
-  with_items:
-      - "{{pxe_mirror}}/arch/boot/i686/archiso.img"
-      - "{{pxe_mirror}}/arch/boot/i686/vmlinuz"
+- name: copy cronjob to mirror airroot livesystem
+  copy: 
+      src: airootsnapper
+      dest: /etc/cron.weekly/ 
+      mode: 744 
+      owner: root 
+      group: root
   notify: restart dnsmasq
 
-- name: download latest x64 archiso and kernel
-  get_url: "url={{item}} mode={{pxe_chown}} dest={{pxe_tftpdir}}/x86_64/ owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
-  with_items:
-      - "{{pxe_mirror}}/arch/boot/x86_64/archiso.img"
-      - "{{pxe_mirror}}/arch/boot/x86_64/vmlinuz"
+- name: download latest airoot livesystem to /srv/http/pxe/arch
+  command: /etc/cron.weekly/airootsnapper
+  when: download_pxe_files
   notify: restart dnsmasq
+
+- name: put symlinks fo archiso kernel/image
+  file: 
+      src:   "/srv/http/pxe/arch/boot/{{item.src}}" 
+      dest:  "{{pxe_tftpdir}}/{{item.dest}}"
+      owner: "{{pxe_chown}}"
+      group: "{{pxe_chgrp}}"
+      mode:  "{{pxe_chmod}}"
+      state: link
+  with_items:
+      - { src: "x86_64/archiso.img", dest: "x86_64/archiso.img" }
+      - { src: "x86_64/vmlinuz",     dest: "x86_64/vmlinuz" }
+      - { src: "i686/archiso.img",   dest: "i686/archiso.img" }
+      - { src: "i686/vmlinuz",       dest: "i686/vmlinuz" }
+ notify: restart dnsmasq
 
 - name: copy boot menu
-  template: "src=default dest={{pxe_tftpdir}}/pxelinux.cfg/default owner={{pxe_chown}} group={{pxe_chgrp}} mode={{pxe_chmod}}"
+  template: 
+      src: default 
+      dest: "{{pxe_tftpdir}}/pxelinux.cfg/default" 
+      owner: "{{pxe_chown}}" 
+      group: "{{pxe_chgrp}}" 
+      mode: "{{pxe_chmod}}"
   notify: restart dnsmasq
 
 - name: copy autoinstall
-  template: "src=autoinstall dest={{pxe_tftpdir}}/{{pxe_script}}"
+  template: src=autoinstall dest=/srv/http/pxe/autoinstall owner=http group=http
+
+- name: copy vhost config
+  template: src=pxe-vhost.conf dest=/etc/http/conf/pxe-vhost.conf
 
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes

@@ -1,0 +1,26 @@
+#!/bin/bash
+# clone everything necessary for a liveboot
+
+mirrors[0]="http://mirror.rackspace.com/archlinux/iso/latest/arch/"
+mirrors[1]="http://ftp5.gwdg.de/pub/linux/archlinux/iso/latest/arch/"
+mirrors[2]="http://ftp.halifax.rwth-aachen.de/archlinux/iso/latest/arch/"
+mirrors[3]="http://ftp.hosteurope.de/mirror/ftp.archlinux.org/iso/latest/arch/"
+mirrors[4]="http://ftp.uni-bayreuth.de/linux/archlinux/iso/latest/arch/"
+mirrors[5]="http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/latest/arch/"
+mirrors[6]="http://ftp.uni-hannover.de/archlinux/iso/latest/arch/"
+mirrors[7]="http://ftp-stud.hs-esslingen.de/pub/Mirrors/archlinux/iso/latest/arch/"
+mirrors[8]="http://mirrors.liquidweb.com/archlinux/iso/latest/arch/"
+mirrors[9]="http://mirror.math.princeton.edu/pub/archlinux/iso/latest/arch/"
+
+rand=$[ $RANDOM % 9 ]
+mirror=${mirrors[$rand]}
+
+for arch in i686 x86_64; do
+
+    mkdir -p "/srv/http/pxe/arch/boot/$arch"
+    mkdir -p "/srv/http/pxe/arch/$arch"
+    wget "$mirror/boot/$arch/archiso.img" -o "/srv/http/pxe/arch/boot/$arch/archiso.img"
+    wget "$mirror/boot/$arch/vmlinuz" -o "/srv/http/pxe/arch/boot/$arch/vmlinuz"
+    wget "$mirror/$arch/airootfs.sfs" -o "/srv/http/pxe/arch/$arch/airootfs.sfs"
+
+done
