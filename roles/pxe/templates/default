@@ -1,34 +1,37 @@
+DISPLAY message
+F1 message
+
 DEFAULT harddisk
 PROMPT 1
-TIMEOUT 10
+TIMEOUT 50
 
-label harddisk
+LABEL harddisk
    localboot 0x80
 
 LABEL liveboot
-MENU LABEL ArchNetboot
+MENU LABEL liveboot
 KERNEL /vmlinuz
 append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}}
 
 {% for plan in partition_plans %}
 LABEL {{ plan }}
-MENU LABEL ArchAutoInstall
+MENU LABEL autoinstall {{plan}}
 KERNEL /x86_64/vmlinuz
 append ip=dhcp checksum=y initrd=/x86_64/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
 
 LABEL {{ plan }}x32
-MENU LABEL ArchAutoInstall
+MENU LABEL autoinstall {{plan}}x32
 KERNEL /i686/vmlinuz
 append ip=dhcp checksum=y initrd=/i686/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
 {% endfor %}
 
-
 LABEL manual
-MENU LABEL ArchAutoInstall
+MENU LABEL autoinstall with interactive partitioning 
 KERNEL /x86_64/vmlinuz
 append ip=dhcp checksum=y initrd=/x86_64/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
 
 LABEL manualx32
-MENU LABEL ArchAutoInstall
+MENU LABEL x32 autoinstall with interactive partitioning 
 KERNEL /i686/vmlinuz
 append ip=dhcp checksum=y initrd=/i686/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
+

@@ -1,0 +1,42 @@
+-----------------------------------------------------------------
+                   -`
+                  .o+`       PXE BOOT on {{ ansible_fqdn }}
+                 `ooo/       OS: ArchLinux 
+                `+oooo:
+               `+oooooo:     MIRROR: {{pxe_mirror}}
+               -+oooooo+:    SCRIPT: {{pxe_script}
+             `/:-:++oooo+:
+            `/++++/+++++++:
+           `/++++++++++++++:
+          `/+++ooooooooooooo/`
+         ./ooosssso++osssssso+` 
+        .oossssso-````/ossssss+`
+       -osssssso.      :ssssssso.      
+      :osssssss/        osssso+++.
+     /ossssssss/        +ssssooo/-
+   `/ossssso+/:-        -:/+osssso+-
+  `+sso+:-`                 `.-/+oso:
+ `++:.                           `-/+/
+ .`                                 `/
+-----------------------------------------------------------------
+Boot options:
+-------------
+ harddisk               boot from harddisk
+ liveboot               boot into live system
+ manual                 autoinstall with interactive partitioning
+ manualx32              autoinstall (boots a x32 kernel)
+
+ <label>                <description>
+                        <device>: <label> <lsector> <fs> <mount>
+
+{% for plan in partition_plans %}
+ {{ plan }}             complete non-interactive installation,
+                        {% for device in partition_plans[plan] %}
+                        {% for partition in partition_plans[plan][device] %}
+                        {{device}}: {{partition.label}} {{partition.lsector}} {{partition.mkfs}} {{partition.mount}}
+                        {% endfor %}
+                        {% endfor %}
+ {{ plan }}             x32 companion
+
+{% endfor %}
+-----------------------------------------------------------------
