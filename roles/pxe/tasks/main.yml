@@ -1,7 +1,7 @@
 ---
 
 - name: include secret passwords
-  include_vars: "secret.yml"
+  include_vars: secret.yml
   no_log: true
 
 - name: install dnsmasq
@@ -20,10 +20,25 @@
       - "{{pxe_tftpdir}}/x86_64"
       - "{{pxe_tftpdir}}/pxelinux.cfg"
 
+# this assumes that the origin
+# machine has syslinux installed
+- name: copy pxelinux.0 and .c32 files
+  copy: 
+    src: /usr/lib/syslinux/bios/{{item}} 
+    dest: "{{pxe_tftpdir}}/{{item}}" 
+  with_items:
+      - "pxelinux.0" 
+      - "gpxelinux.0" 
+      - "libutil.c32" 
+      - "ldlinux.c32" 
+      - "libcom32.c32"
+      - "menu.c32"
+      - "vesamenu.c32"
+
 - name: copy cronjob to mirror airroot livesystem
   copy: 
       src: airootsnapper
-      dest: /etc/cron.weekly/ 
+      dest: /etc/cron.monthly/ 
       mode: 744 
       owner: root 
       group: root
@@ -42,12 +57,13 @@
       group: "{{pxe_chgrp}}"
       mode:  "{{pxe_chmod}}"
       state: link
+      force: yes
   with_items:
       - { src: "x86_64/archiso.img", dest: "x86_64/archiso.img" }
       - { src: "x86_64/vmlinuz",     dest: "x86_64/vmlinuz" }
       - { src: "i686/archiso.img",   dest: "i686/archiso.img" }
       - { src: "i686/vmlinuz",       dest: "i686/vmlinuz" }
- notify: restart dnsmasq
+  notify: restart dnsmasq
 
 - name: copy boot menu
   template: 
@@ -62,7 +78,8 @@
   template: src=autoinstall dest=/srv/http/pxe/autoinstall owner=http group=http
 
 - name: copy vhost config
-  template: src=pxe-vhost.conf dest=/etc/http/conf/pxe-vhost.conf
+  template: src=pxe-vhost.conf dest=/etc/httpd/conf/pxe-vhost.conf
+  notify: restart apache
 
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes
