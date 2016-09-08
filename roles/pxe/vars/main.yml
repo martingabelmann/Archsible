@@ -4,7 +4,7 @@ pxe_mirror: "http://mirror.rackspace.com/archlinux/iso/latest/"
 pxe_chown: "root"
 pxe_chmod: "0755"
 pxe_chgrp: "root"
-pxe_script: "autoinstall"
+pxe_script: "http://{{ansible_fqdn}}/autoinstall"
 
 partition_plans:
     root:

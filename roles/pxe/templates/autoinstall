@@ -13,7 +13,7 @@ if  [ "$1" == "install" ]
 then
     # setup ssh
     pacman --noconfirm -S openssh sshpass parted
-    echo root:{% include "passwd" %} | chpasswd
+    echo root:{{root_password}} | chpasswd
     systemctl start sshd
     
     # parse kernel args for install options
@@ -23,7 +23,12 @@ then
 
     # various partition plans
     {% for plan in partition_plans %}
+    
+    {% if loop.first %}
     if [[ "$plan" = {{ plan }} ]]
+    {% else %}
+    elif [[ "$plan" = {{ plan }} ]]
+    {% endif %}
     then
 {% for device in partition_plans[plan] %}
 {% for partition in partition_plans[plan][device] %}
@@ -67,20 +72,18 @@ BOOT_PART="{{device}}{{partition.number}}"
 {% endif -%}
 {% endfor -%}
 {% endfor -%}
-    fi
-    {% endfor -%}
-    if [[ "$plan" = "part_manual" ]]
-    then
+    else 
+{% endfor -%}
         echo -e 'You`ve booted into the interactive (partition) mode.\n\n
-        * Do your specific partitioning using [c]fdisk 
-        * create filesystems e.g.  using mkfs.ext4 -L label /dev/sdXn 
-        * set the booting device variable for syslinux in the /tmp/bootdev file: echo "BOOT_PART=/dev/sdXn" >> /tmp/bootdev
-        * mount the root partition with "mount /dev/sdXn /mnt"
-        * exit the shell with crtl+d\n 
-        The installation will proceed then..\n'
-        bash -c "exec zsh"
-        source /tmp/bootdev
-        echo -e '\n Exit interavtive mode proceeding with automatic installation..\n'
+            * Do your specific partitioning using [c]fdisk 
+            * create filesystems e.g.  using mkfs.ext4 -L label -O "^64bit" /dev/sdXn 
+            * set the booting device variable for syslinux in the /tmp/bootdev file: echo "BOOT_PART=/dev/sdXn" >> /tmp/bootdev
+            * mount the root partition with "mount /dev/sdXn /mnt"
+            * exit the shell with crtl+d\n 
+            The installation will proceed then..\n'
+            bash -c "exec zsh"
+            source /tmp/bootdev
+            echo -e '\n Exit interavtive mode proceeding with automatic installation..\n'
     fi
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
     grep -E -A 1 '.*Germany.*$' /etc/pacman.d/mirrorlist.bak | sed '/--/d' > /etc/pacman.d/mirrorlist
@@ -96,8 +99,8 @@ BOOT_PART="{{device}}{{partition.number}}"
     
     # install syslinux bootloader
     archchroot "pacman --noconfirm -S syslinux"
-    sed -i "s/sda3/$BOOT_PART/g" /mnt/boot/syslinux/syslinux.cfg
-    archchroot "syslinux-install_update -iam"
+    sed -i "s|/dev/sda3|$BOOT_PART|g" /mnt/boot/syslinux/syslinux.cfg
+    syslinux-install_update -i -a -m -c /mnt/
 
     # set hostname
     ip=$(ip -o -f inet addr|awk '{print $4}'|cut -f1 -d '/'|sed 's/127.0.0.1//g'|tr -d '\n')
@@ -118,6 +121,7 @@ BOOT_PART="{{device}}{{partition.number}}"
     mkdir -p /mnt/etc/ansible/group_vars
     echo 'ansible_python_interpreter: /usr/bin/python2' >> /mnt/etc/ansible/group_vars/all
     mkdir /mnt/var/lib/ansible
+    if [ "{{ansible_repo['url']}}" != "setmet" ]; then
 echo -e "[Unit]
 Description=run ansible-pull on startup
 After=network.target
@@ -131,6 +135,7 @@ ExecStart=/bin/bash -c '/usr/bin/ansible-pull -d /var/lib/ansible -U {{ansible_r
 WantedBy=multi-user.target
 " >> /mnt/etc/systemd/system/ansible_pull.service
     archchroot "systemctl enable ansible_pull.service"
+    fi
     
     # enable network manager
     archchroot "systemctl enable NetworkManager"

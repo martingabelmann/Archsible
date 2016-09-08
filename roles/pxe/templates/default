@@ -5,31 +5,30 @@ TIMEOUT 10
 label harddisk
    localboot 0x80
 
-LABEL netboot
+LABEL liveboot
 MENU LABEL ArchNetboot
 KERNEL /vmlinuz
 append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}}
 
-LABEL autoinstall
-MENU LABEL ArchAutoInstall
-KERNEL /vmlinuz
-append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
-
 {% for plan in partition_plans %}
-LABEL part_{{ plan }}
+LABEL {{ plan }}
 MENU LABEL ArchAutoInstall
-KERNEL /vmlinuz
-append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
+KERNEL /x86_64/vmlinuz
+append ip=dhcp checksum=y initrd=/x86_64/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
+
+LABEL {{ plan }}x32
+MENU LABEL ArchAutoInstall
+KERNEL /i686/vmlinuz
+append ip=dhcp checksum=y initrd=/i686/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
 {% endfor %}
 
 
-LABEL part_manual
+LABEL manual
 MENU LABEL ArchAutoInstall
-KERNEL /vmlinuz
-append ip=dhcp checksum=y initrd=/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan=part_manual
+KERNEL /x86_64/vmlinuz
+append ip=dhcp checksum=y initrd=/x86_64/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
 
-LABEL part_manualx32
+LABEL manualx32
 MENU LABEL ArchAutoInstall
-KERNEL /vmlinuzx32
-append ip=dhcp checksum=y initrd=/archiso32.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan=part_manual
-
+KERNEL /i686/vmlinuz
+append ip=dhcp checksum=y initrd=/i686/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
