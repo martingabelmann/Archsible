@@ -67,11 +67,14 @@
 
 - name: copy boot menu
   template: 
-      src: default 
-      dest: "{{pxe_tftpdir}}/pxelinux.cfg/default" 
+      src: "{{item.src}}" 
+      dest: "{{pxe_tftpdir}}/{{item.dst}}" 
       owner: "{{pxe_chown}}" 
       group: "{{pxe_chgrp}}" 
       mode: "{{pxe_chmod}}"
+  with_items:
+      - { src: message, dst: message }
+      - { src: default, dst: pxelinux.cfg/default }
   notify: restart dnsmasq
 
 - name: copy autoinstall
