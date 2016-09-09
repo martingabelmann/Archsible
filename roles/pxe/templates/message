@@ -24,8 +24,9 @@ Boot options:
 
  harddisk               boot from harddisk
  liveboot               boot into live system
+ livebootx32            boot into live system (32 kernel)
  manual                 autoinstall with interactive partitioning
- manualx32              autoinstall (boots a x32 kernel)
+ manualx32              autoinstall (32 kernel)
 
 ----
 

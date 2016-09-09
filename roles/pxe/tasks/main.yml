@@ -35,7 +35,7 @@
       - "menu.c32"
       - "vesamenu.c32"
 
-- name: copy cronjob to mirror airroot livesystem
+- name: copy cronjob to mirror livesystem
   copy: 
       src: airootsnapper
       dest: /etc/cron.monthly/ 
@@ -44,7 +44,7 @@
       group: root
   notify: restart dnsmasq
 
-- name: download latest airoot livesystem to /srv/http/pxe/arch
+- name: download latest livesystem to /srv/http/pxe/arch
   command: /etc/cron.weekly/airootsnapper
   when: download_pxe_files
   notify: restart dnsmasq
