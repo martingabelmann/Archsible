@@ -1,37 +1,37 @@
 ---
 
-default_source: '{{ internal_subnet }}'
-default_dest: '0.0.0.0/0'
+default_source: "{{ internal_subnet }}"
+default_dest: 0.0.0.0/0
 
 rules:
   all:
-    ssh:
-      protocol: 'tcp'
-      port: '22'
-      source: '{{ internal_subnet }}'
-      dest: '0.0.0.0/0'
-    munin:
-      protocol: 'tcp'
-      port: '4949'
+    ssh:   { protocol: tcp, port: 22 }
+    munin: { protocol: tcp, port: 4949 }
+
   pyload:
-    cnload:
-      protocol: 'tcp'
-      port: '9996'
-    pyload:
-      protocol: 'tcp'
-      port: '9999'
+    cnload: { protocol: tcp, port: 9996 }
+    pyload: { protocol: tcp, port: 9999 }
+
   pxe:
-    tftpd:
-      protocol: 'udp'
-      port: '69'
-    http:
-      protocol: 'tcp'
-      port: '80'
+    tftpd: { protocol: udp, port: 69 }
+    http:  { protocol: tcp, port: 80 }
+    dns1:  { protocol: udp, port: 53 }
+    dns2:  { protocol: tcp, port: 53 }
+    dhcp:
+      protocol: udp
+      port: 67
+      source: 0.0.0.0/0
+    dhcp_proxy:
+      protocol: udp
+      port: 4011
+      source: 0.0.0.0/0
+      
   munin-server:
     http:
-      protocol: 'tcp'
-      port: '80'
+      protocol: tcp
+      port: 80
+
   cups-server:
     cups:
-      protocol: 'tcp'
-      port: '631'
+      protocol: tcp
+      port: 631
