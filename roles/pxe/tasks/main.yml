@@ -84,5 +84,8 @@
   template: src=pxe-vhost.conf dest=/etc/httpd/conf/pxe-vhost.conf
   notify: restart apache
 
+- name: stop and disable systemd-resolve
+  service: name=systemd-resolved state=stopped enabled=no
+
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes
