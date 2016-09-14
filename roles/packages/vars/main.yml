@@ -85,6 +85,10 @@ xpackages:
     - xorg-xinit
     - awesome
     - simple-scan
+    - gstreamer
+    - gst-plugins-good
+    - gst-plugins-bad
+    - gst-plugins-ugly
     - vlc
     - luakit
     - qutebrowser
