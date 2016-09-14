@@ -35,3 +35,6 @@ rules:
     cups:
       protocol: tcp
       port: 631
+    sane:
+      protocol: tcp
+      port: 6566
