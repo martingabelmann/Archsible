@@ -84,6 +84,8 @@ xpackages:
     - xorg-server-utils
     - xorg-xinit
     - awesome
+    - archlinux-xdg-menu
+    - slock 
     - simple-scan
     - gstreamer
     - gst-plugins-good
