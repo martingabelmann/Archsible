@@ -15,13 +15,13 @@
 
 
 - name: run pyload
-  docker:
+  docker_container:
       name: pyload
       image: martingabelmann/pyload
-      state: reloaded
-      pull: always
+      state: started
+      pull: True
       restart_policy: always
-      restart_policy_retry: 30
+      restart_retry: 30
       volumes:
           - /srv/docker/pyload/conf:/conf
           - /srv/docker/pyload/dl:/dl
