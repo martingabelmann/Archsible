@@ -24,9 +24,13 @@ common_packages:
     - munin-node
     - gcc
     - make
+    - powerline
+    - powerline-common
     - python
+    - python-powerline
     - python-packaging
     - python-dbus-common
+    - python-numpy
     - python-jinja
     - python-pip
     - python-pluggy
@@ -98,6 +102,9 @@ xpackages:
     - thunderbird 
     - chromium
     - inkscape
+    - gimp
+    - mirage
+    - nemo
     - libreoffice-fresh
     - qt4
     - qt5-base
