@@ -97,6 +97,8 @@ xpackages:
     - gst-plugins-ugly
     - vlc
     - luakit
+    - pacgraph
+    - baobab
     - qutebrowser
     - firefox
     - thunderbird 
