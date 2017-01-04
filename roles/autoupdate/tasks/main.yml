@@ -5,3 +5,11 @@
 
 - name: copy logrotate
   copy: src=logrotate dest=/etc/logrotate.d/autoupdate owner=root group=root mode="u=rw,g=r,o=r"
+
+- name: clear pkg cache
+  cron: 
+    name: clear pacman cache 
+    day: "*/3"
+    hour: 0
+    minute: 0
+    job: "pacman -Sc --noconfirm"
