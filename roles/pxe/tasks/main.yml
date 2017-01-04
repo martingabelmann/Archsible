@@ -77,6 +77,9 @@
       - { src: default, dst: pxelinux.cfg/default }
   notify: restart dnsmasq
 
+- name: make sure http/pxe exitst
+  file: path=/srv/http/pxe/ state=directory
+
 - name: copy autoinstall
   template: src=autoinstall dest=/srv/http/pxe/autoinstall owner=http group=http
 
