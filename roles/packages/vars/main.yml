@@ -85,6 +85,7 @@ xpackages:
     - chromium
     - inkscape
     - gimp
+    - gtk3-print-backends
     - mirage
     - nemo
     - libreoffice-fresh
