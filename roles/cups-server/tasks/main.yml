@@ -9,7 +9,7 @@
       - sane
 
 - name: copy cupsd.conf
-  template: src=cupsd.conf dest=/etc/cupsd.conf
+  template: src=cupsd.conf dest=/etc/cups/cupsd.conf
   notify: restart cups
 
 - name: make scanners available to network
