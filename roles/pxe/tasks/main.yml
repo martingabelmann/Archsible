@@ -8,11 +8,11 @@
   pacman: name=dnsmasq state=present
 
 - name: create tftp dirs
-  file: 
-      path: "{{item}}" 
-      state: directory 
-      owner: "{{pxe_chown}}" 
-      group: "{{pxe_chgrp}}" 
+  file:
+      path: "{{item}}"
+      state: directory
+      owner: "{{pxe_chown}}"
+      group: "{{pxe_chgrp}}"
       mode: "{{pxe_chmod}}"
   with_items:
       - "{{pxe_tftpdir}}"
@@ -23,24 +23,24 @@
 # this assumes that the origin
 # machine has syslinux installed
 - name: copy pxelinux.0 and .c32 files
-  copy: 
-    src: /usr/lib/syslinux/bios/{{item}} 
-    dest: "{{pxe_tftpdir}}/{{item}}" 
+  copy:
+    src: /usr/lib/syslinux/bios/{{item}}
+    dest: "{{pxe_tftpdir}}/{{item}}"
   with_items:
-      - "pxelinux.0" 
-      - "gpxelinux.0" 
-      - "libutil.c32" 
-      - "ldlinux.c32" 
+      - "pxelinux.0"
+      - "gpxelinux.0"
+      - "libutil.c32"
+      - "ldlinux.c32"
       - "libcom32.c32"
       - "menu.c32"
       - "vesamenu.c32"
 
 - name: copy cronjob to mirror livesystem
-  copy: 
+  copy:
       src: airootsnapper
-      dest: /etc/cron.monthly/ 
-      mode: 744 
-      owner: root 
+      dest: /etc/cron.monthly/
+      mode: 0744
+      owner: root
       group: root
   notify: restart dnsmasq
 
@@ -50,8 +50,8 @@
   notify: restart dnsmasq
 
 - name: put symlinks fo archiso kernel/image
-  file: 
-      src:   "/srv/http/pxe/arch/boot/{{item.src}}" 
+  file:
+      src:   "/srv/http/pxe/arch/boot/{{item.src}}"
       dest:  "{{pxe_tftpdir}}/{{item.dest}}"
       owner: "{{pxe_chown}}"
       group: "{{pxe_chgrp}}"
@@ -66,11 +66,11 @@
   notify: restart dnsmasq
 
 - name: copy boot menu
-  template: 
-      src: "{{item.src}}" 
-      dest: "{{pxe_tftpdir}}/{{item.dst}}" 
-      owner: "{{pxe_chown}}" 
-      group: "{{pxe_chgrp}}" 
+  template:
+      src: "{{item.src}}"
+      dest: "{{pxe_tftpdir}}/{{item.dst}}"
+      owner: "{{pxe_chown}}"
+      group: "{{pxe_chgrp}}"
       mode: "{{pxe_chmod}}"
   with_items:
       - { src: message, dst: message }
