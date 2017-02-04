@@ -103,12 +103,17 @@ BOOT_PART="{{device}}{{partition.number}}"
     syslinux-install_update -i -a -m -c /mnt/
 
     # set hostname
-    ip=$(ip -o -f inet addr|awk '{print $4}'|cut -f1 -d '/'|sed 's/127.0.0.1//g'|tr -d '\n')
-    hostname=$(nslookup "$ip" {{dnsserver['ip']}}|awk -F= '{print $2}'|tr -d '\n'|tr -d ' ')
+    ip=$(host $(hostname)|awk '{print $4}')
+    hostname=$(nslookup "$ip" {{dnsserver['ip']}}|awk -F= '{print $2}'|tr -d '\n| ')
     hostname=${hostname%?}
     shortname=$(echo "$hostname"|cut -d '.' -f1)
-    echo "$ip    $hostname  $shortname" >> /mnt/etc/hosts
-    echo "$shortname" > /mnt/etc/hostname
+    if [ ! -z "${ip// }" ] && [ ! -z "${hostname// }" ]; then
+        echo "$ip    $hostname  $shortname" >> /mnt/etc/hosts
+        echo "$shortname" > /mnt/etc/hostname
+    else
+        echo "could not set hostname:"
+        echo "ip: $ip, hostname: $hostname, shortname: $shortname"
+    fi
 
     # set us locale
     sed -i 's/#en_US/en_US/g' /mnt/etc/locale.gen
