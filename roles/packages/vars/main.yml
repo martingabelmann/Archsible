@@ -24,6 +24,7 @@ common_packages:
     - munin-node
     - gcc
     - make
+    - net-tools
     - python
     - python-packaging
     - python-jinja
