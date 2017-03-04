@@ -15,6 +15,9 @@
 - name: restart munin-node
   service: name=munin-node state=restarted
 
+- name: configure munin plugins
+  shell: "munin-node-configure --shell | sh"
+
 - name: restart nfs
   service: name=nfs-server state=restarted
 
