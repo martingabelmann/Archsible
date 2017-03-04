@@ -3,7 +3,7 @@
 ansible_python_interpreter: /usr/bin/python2
 
 internal_subnet: 192.168.178.20/192.168.178.255
-munin_ip: 192.168.178.29
+munin_ip: "{{ lookup('dig', groups['munin-server'][0], wantlist=true)[0] }}"
 
 dnsserver:
     name: htpc

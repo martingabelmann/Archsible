@@ -28,6 +28,7 @@ common_packages:
     - python
     - python-packaging
     - python-jinja
+    - python-dnspython
     - python-pip
     - python-py
     - python-setuptools
@@ -38,6 +39,7 @@ common_packages:
     - python2
     - python2-crypto
     - python2-dbus
+    - python2-dnspython
     - python2-ecdsa
     - python2-jinja
     - python2-markupsafe
