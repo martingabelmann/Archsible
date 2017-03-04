@@ -3,6 +3,9 @@
 - name: install munin-server
   pacman: name=munin state=present
 
+- name: create munin http dir
+  file: path=/srv/http/munin user=munin group=munin
+
 - name: copy config and generate munin hostlist
   template: src=munin.conf dest=/etc/munin/munin.conf
 
