@@ -90,5 +90,9 @@
 - name: stop and disable systemd-resolve
   service: name=systemd-resolved state=stopped enabled=no
 
+- name: copy dnsmaq conf
+  template: src=dnsmasq.conf dest=/etc/dnsmasq.conf
+  notify: restart dnsmasq
+
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes
