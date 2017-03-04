@@ -6,8 +6,8 @@ internal_subnet: 192.168.178.20/192.168.178.255
 munin_ip: "{{ lookup('dig', groups['munin-server'][0], wantlist=true)[0] }}"
 
 dnsserver:
-    name: htpc
-    ip: 192.168.178.29
+    name: fritz.box
+    ip: 192.168.178.1
 
 ansible_repo: 
     url: setme
