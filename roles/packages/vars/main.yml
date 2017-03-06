@@ -23,6 +23,7 @@ common_packages:
     - acpi
     - munin-node
     - gcc
+    - iftop
     - make
     - net-tools
     - python
