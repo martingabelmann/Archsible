@@ -114,6 +114,7 @@ xpackages:
     - python2-numpy
     - python2-xdg
     - python2-keybinder2
+    - flake8
     - qt5-tools
     - qt5-webchannel
     - qt5-webkit
