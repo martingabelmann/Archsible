@@ -73,7 +73,7 @@ xpackages:
     - xorg-xinit
     - awesome
     - archlinux-xdg-menu
-    - slock 
+    - slock
     - simple-scan
     - gstreamer
     - gst-plugins-good
@@ -84,7 +84,7 @@ xpackages:
     - baobab
     - qutebrowser
     - firefox
-    - thunderbird 
+    - thunderbird
     - chromium
     - inkscape
     - gimp
@@ -108,7 +108,7 @@ xpackages:
     - python-numpy
     - python2-cairo
     - python2-gconf
-    - python2-gobject2  
+    - python2-gobject2
     - python2-cffi
     - python2-paramiko
     - python2-numpy
@@ -130,3 +130,4 @@ xpackages:
     - texlive-langgreek
     - texlive-science
     - texmaker
+    - time
