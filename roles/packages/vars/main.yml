@@ -87,6 +87,7 @@ xpackages:
     - thunderbird
     - chromium
     - inkscape
+    - keybase
     - gimp
     - gtk3-print-backends
     - mirage
