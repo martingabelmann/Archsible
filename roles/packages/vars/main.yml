@@ -92,6 +92,11 @@ xpackages:
     - gtk3-print-backends
     - mirage
     - nemo
+    - owncloud-client
+    - gcc-fortran
+    - cifs-utils
+    - pulseaudio
+    - pavucontrol
     - libreoffice-fresh
     - qt4
     - qt5-base
