@@ -4,7 +4,7 @@
   pacman: name=munin state=present
 
 - name: create munin http dir
-  file: path=/srv/http/munin user=munin group=munin
+  file: path=/srv/http/munin owner=munin group=munin
 
 - name: add munin user to log group
   user: name=munin groups=munin,log

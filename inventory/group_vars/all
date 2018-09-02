@@ -2,7 +2,7 @@
 
 ansible_python_interpreter: /usr/bin/python2
 
-internal_subnet: 192.168.178.20/192.168.178.255
+internal_subnet: 192.168.178.20/24
 munin_ip: "{{ lookup('dig', groups['munin-server'][0], wantlist=true)[0] }}"
 
 dnsserver:
