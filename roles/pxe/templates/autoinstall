@@ -72,8 +72,8 @@ BOOT_PART="{{device}}{{partition.number}}"
 {% endif -%}
 {% endfor -%}
 {% endfor -%}
-    else 
 {% endfor -%}
+    else 
         echo -e 'You`ve booted into the interactive (partition) mode.\n\n
             * Do your specific partitioning using [c]fdisk 
             * create filesystems e.g.  using mkfs.ext4 -L label -O "^64bit" /dev/sdXn 
