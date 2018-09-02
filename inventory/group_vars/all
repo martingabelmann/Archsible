@@ -21,7 +21,7 @@ nfs_exports:
       options: "rw,fsid=root,no_subtree_check"
       iprange: "{{ internal_subnet }}"
     - name: exampleshare
-      path: "/srv/export/example"
+      path: "/srv/export/media"
       options: "rw,no_subtree_check,no_root_squash"
       iprange: "{{ internal_subnet }}"
 
