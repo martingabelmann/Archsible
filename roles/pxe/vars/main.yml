@@ -9,7 +9,7 @@ pxe_script: "http://{{ansible_default_ipv4['address']}}/pxe/autoinstall"
 partition_plans:
     root:
         sda:
-            - { label: arch, type: p, lsector: +50G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
+            - { label: arch, type: p, lsector: +100G, number: 1, bootable: true, mkfs: ext4, typehex: 83, mount: / }
             - { label: swap, type: e, lsector: +2G, number: 2, bootable: false, mkfs: swap, typehex: 82, mount: false }
     extrahome:
         sda:

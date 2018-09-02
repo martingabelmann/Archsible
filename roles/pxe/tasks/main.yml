@@ -45,7 +45,7 @@
   notify: restart dnsmasq
 
 - name: download latest livesystem to /srv/http/pxe/arch
-  command: /etc/cron.weekly/airootsnapper
+  command: /etc/cron.monthly/airootsnapper
   when: download_pxe_files
   notify: restart dnsmasq
 
