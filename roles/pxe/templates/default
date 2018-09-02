@@ -14,23 +14,21 @@ LABEL harddisk
 MENU DEFAULT
 LOCALBOOT 0x80
 
-{% for arch in ["x86_64", "i686"] %}
-LABEL liveboot{{ arch|replace("x86_64","")|replace("i686", "x32") }}
-MENU LABEL liveboot{{ arch|replace("x86_64","")|replace("i686", "x32") }}
+{% set arch = "x86_64" %}
+LABEL liveboot
+MENU LABEL liveboot
 KERNEL /{{arch}}/vmlinuz
 append ip=dhcp checksum=y initrd=/{{arch}}/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}}
 
 {% for plan in partition_plans %}
-LABEL {{ plan }}{{ arch|replace("x86_64","")|replace("i686", "x32") }}
-MENU LABEL autoinstall {{plan}} for {{arch}}
+LABEL {{ plan }}
+MENU LABEL autoinstall {{plan}}
 KERNEL /{{arch}}/vmlinuz
 append ip=dhcp checksum=y initrd=/{{arch}}/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}} partition_plan={{ plan }} 
 
 {% endfor %}
 
-LABEL manual{{ arch|replace("x86_64","")|replace("i686", "x32") }}
-MENU LABEL {{arch}} autoinstall with interactive partitioning
+LABEL manual
+MENU LABEL autoinstall with interactive partitioning
 KERNEL /{{arch}}/vmlinuz
 append ip=dhcp checksum=y initrd=/{{arch}}/archiso.img archisobasedir=arch archiso_http_srv={{pxe_mirror}} script={{pxe_script}}
-
-{% endfor %}

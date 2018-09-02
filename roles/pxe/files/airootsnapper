@@ -14,14 +14,13 @@ mirrors[9]="http://mirror.math.princeton.edu/pub/archlinux/iso/latest/arch/"
 
 rand=$[ $RANDOM % 9 ]
 mirror=${mirrors[$rand]}
+arch="x86_64"
 
-for arch in i686 x86_64; do
-    mkdir -p "/srv/http/pxe/arch/boot/$arch"
-    mkdir -p "/srv/http/pxe/arch/$arch"
-    wget "$mirror/boot/$arch/archiso.img" -O "/srv/http/pxe/arch/boot/$arch/archiso.img"
-    wget "$mirror/boot/$arch/vmlinuz" -O "/srv/http/pxe/arch/boot/$arch/vmlinuz"
-    wget "$mirror/$arch/airootfs.sfs" -O "/srv/http/pxe/arch/$arch/airootfs.sfs"
-    wget "$mirror/$arch/airootfs.md5" -O "/srv/http/pxe/arch/$arch/airootfs.md5"
-done
+mkdir -p "/srv/http/pxe/arch/boot/$arch"
+mkdir -p "/srv/http/pxe/arch/$arch"
+wget "$mirror/boot/$arch/archiso.img" -O "/srv/http/pxe/arch/boot/$arch/archiso.img"
+wget "$mirror/boot/$arch/vmlinuz" -O "/srv/http/pxe/arch/boot/$arch/vmlinuz"
+wget "$mirror/$arch/airootfs.sfs" -O "/srv/http/pxe/arch/$arch/airootfs.sfs"
+wget "$mirror/$arch/airootfs.md5" -O "/srv/http/pxe/arch/$arch/airootfs.md5"
 
 systemctl restart dnsmasq

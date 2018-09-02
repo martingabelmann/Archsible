@@ -24,9 +24,7 @@ Boot options:
 
  harddisk               boot from harddisk
  liveboot               boot into live system
- livebootx32            boot into live system (32 kernel)
  manual                 autoinstall with interactive partitioning
- manualx32              autoinstall (32 kernel)
 
 ----
 
@@ -36,7 +34,7 @@ Boot options:
     <device>  <label>  <lsector>  <fs>  <mount>
 
 {% for plan in partition_plans %}
- {{ plan }}[x32]    
+ {{ plan }}
 {% for device in partition_plans[plan] -%}
 {% for partition in partition_plans[plan][device] %}
     {{device}}  {{partition.label}}  {{partition.lsector}}  {{partition.mkfs}}  {{partition.mount}}
