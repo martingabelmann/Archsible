@@ -1,0 +1,10 @@
+PermitRootLogin {% if 'servers' in group_names %} yes {% else %} no {% endif %}
+
+AuthorizedKeysFile	.ssh/authorized_keys
+ChallengeResponseAuthentication no
+UsePAM yes
+UseDNS no
+X11Forwarding yes
+PrintMotd no # pam does that
+IPQoS cs0
+Subsystem   sftp    /usr/lib/ssh/sftp-server
