@@ -1,26 +1,13 @@
 #!/bin/bash
 # clone everything necessary for a liveboot
 
-mirrors[0]="http://mirror.rackspace.com/archlinux/iso/latest/arch/"
-mirrors[1]="http://ftp5.gwdg.de/pub/linux/archlinux/iso/latest/arch/"
-mirrors[2]="http://ftp.halifax.rwth-aachen.de/archlinux/iso/latest/arch/"
-mirrors[3]="http://ftp.hosteurope.de/mirror/ftp.archlinux.org/iso/latest/arch/"
-mirrors[4]="http://ftp.uni-bayreuth.de/linux/archlinux/iso/latest/arch/"
-mirrors[5]="http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/latest/arch/"
-mirrors[6]="http://ftp.uni-hannover.de/archlinux/iso/latest/arch/"
-mirrors[7]="http://ftp-stud.hs-esslingen.de/pub/Mirrors/archlinux/iso/latest/arch/"
-mirrors[8]="http://mirrors.liquidweb.com/archlinux/iso/latest/arch/"
-mirrors[9]="http://mirror.math.princeton.edu/pub/archlinux/iso/latest/arch/"
+# change country to your needs
+mirrorlist=$(wget --tries=3 -T 60 -q -O- "https://www.archlinux.org/mirrorlist/?country=DE&protocol=https&ip_version=4" |sed 's/#Server = https/rsync/'|grep -v '^#'|sed 's/\/$repo\/os\/$arch//')
 
-rand=$[ $RANDOM % 9 ]
-mirror=${mirrors[$rand]}
-arch="x86_64"
-
-mkdir -p "/srv/http/pxe/arch/boot/$arch"
-mkdir -p "/srv/http/pxe/arch/$arch"
-wget "$mirror/boot/$arch/archiso.img" -O "/srv/http/pxe/arch/boot/$arch/archiso.img"
-wget "$mirror/boot/$arch/vmlinuz" -O "/srv/http/pxe/arch/boot/$arch/vmlinuz"
-wget "$mirror/$arch/airootfs.sfs" -O "/srv/http/pxe/arch/$arch/airootfs.sfs"
-wget "$mirror/$arch/airootfs.md5" -O "/srv/http/pxe/arch/$arch/airootfs.md5"
+rand="$[ $RANDOM % 9 ]q;d"
+mirror=`echo "$mirrorlist"| sed $rand`
+echo mirroring from $mirror
+cd /srv/http/pxe/
+rsync -av --progress "$mirror/iso/latest/arch" .
 
 systemctl restart dnsmasq

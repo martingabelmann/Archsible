@@ -16,7 +16,6 @@
       mode: "{{pxe_chmod}}"
   with_items:
       - "{{pxe_tftpdir}}"
-      - "{{pxe_tftpdir}}/i686"
       - "{{pxe_tftpdir}}/x86_64"
       - "{{pxe_tftpdir}}/pxelinux.cfg"
 
@@ -61,8 +60,6 @@
   with_items:
       - { src: "x86_64/archiso.img", dest: "x86_64/archiso.img" }
       - { src: "x86_64/vmlinuz",     dest: "x86_64/vmlinuz" }
-      - { src: "i686/archiso.img",   dest: "i686/archiso.img" }
-      - { src: "i686/vmlinuz",       dest: "i686/vmlinuz" }
   notify: restart dnsmasq
 
 - name: copy boot menu
