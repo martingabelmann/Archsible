@@ -38,11 +38,17 @@
 {%        if share['path'] is defined and export_ip not in all_ips %}
 {{            "-A TCP -s {0} -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m tcp --dport 2049 -j ACCEPT".format(export_ip)  }}
 {{            "-A UDP -s {0} -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m udp --dport 2049 -j ACCEPT".format(export_ip)  }}
+{{            "-A TCP -s {0} -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m tcp --dport 111 -j ACCEPT".format(export_ip)  }}
 {{            "-A UDP -s {0} -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m udp --dport 111 -j ACCEPT".format(export_ip)  }}
+{{            "-A TCP -s {0} -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m tcp --dport 8749 -j ACCEPT".format(export_ip)  }}
 {{            "-A UDP -s {0} -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED -m udp --dport 8749 -j ACCEPT".format(export_ip)  }}
 {%            set _ = all_ips.append(export_ip) %}
 {%        endif %}
 {%    endfor %}
 {% endif %}
+
+# logging
+-A UDP -m limit --limit 2/min -j LOG --log-prefix "UDP-DROP: " --log-level 4
+-A TCP -m limit --limit 2/min -j LOG --log-prefix "TCP-DROP: " --log-level 4
 
 COMMIT
