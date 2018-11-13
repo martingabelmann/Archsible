@@ -64,6 +64,7 @@ common_packages:
     - tzdata
     - pass
     - wol
+    - ranger
 
 xpackages:
     - asciidoc
