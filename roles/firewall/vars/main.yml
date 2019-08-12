@@ -26,12 +26,12 @@ rules:
       port: 4011
       source: 0.0.0.0/0
       
-  munin-server:
+  munin_server:
     http:
       protocol: tcp
       port: 80
 
-  cups-server:
+  cups_server:
     cups:
       protocol: tcp
       port: 631

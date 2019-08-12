@@ -28,12 +28,12 @@
       - firewall
   tags: pyload
 
-- name: munin-server
-  hosts: munin-server
+- name: munin_server
+  hosts: munin_server
   roles:
-      - munin-server
+      - munin_server
       - firewall
-  tags: munin-server
+  tags: munin_server
 
 - name: pxe
   hosts: pxe
@@ -42,10 +42,10 @@
       - firewall
   tags: pxe
 
-- name: cups-server
-  hosts: cups-server
+- name: cups_server
+  hosts: cups_server
   roles:
-    - cups-server
+    - cups_server
   tags:
-      - cups-server
+      - cups_server
       - cups

@@ -22,8 +22,8 @@ raspberry
 raspberry
 htpc
 
-[munin-server]
+[munin_server]
 raspberry
 
-[cups-server]
+[cups_server]
 raspberry

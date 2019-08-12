@@ -9,9 +9,9 @@
 # /etc/profile is also sourced by zsh/csh
 - name: set cups server in profile file
   lineinfile: dest=/etc/profile line="export CUPS_SERVER={{item}}"
-  with_items: "{{ groups['cups-server'] }}"
+  with_items: "{{ groups['cups_server'] }}"
 
 - name: configure sane to use shared scanners
   lineinfile: dest=/etc/sane.d/net.conf line="{{item}}"
-  with_items: "{{ groups['cups-server'] }}"
+  with_items: "{{ groups['cups_server'] }}"
   notify: restart sane
