@@ -15,6 +15,9 @@ htpc
 htpc
 raspberry
 
+[dnsserver]
+raspberry
+
 [nfsserver]
 raspberry
 htpc

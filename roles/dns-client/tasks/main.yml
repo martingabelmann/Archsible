@@ -1,0 +1,7 @@
+---
+
+lineinfile:
+    create: yes
+    path: /etc/resolv.conf
+    line: 'nameserver {{item}}'
+ loop: "{{external_dnsserver}}"

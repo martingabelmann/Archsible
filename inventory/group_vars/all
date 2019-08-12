@@ -1,13 +1,10 @@
 ---
 
-ansible_python_interpreter: /usr/bin/python2
-
-internal_subnet: 192.168.178.20/24
+internal_subnet: 192.168.0.178/24
 munin_ip: "{{ lookup('dig', groups['munin-server'][0], wantlist=true)[0] }}"
 
-dnsserver:
-    name: fritz.box
-    ip: 192.168.178.1
+external_dnsservers:
+      - 192.168.0.1
 
 ansible_repo: 
     url: setme

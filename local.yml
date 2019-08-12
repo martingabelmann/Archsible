@@ -11,6 +11,7 @@
     - { role: autoupdate, tags: ['autoupdate'] }
     - { role: cups-client, tags: ['cups-client', 'cups'] }
     - { role: firewall, tags: ['firewall'] }
+    - { role: dns-client, tags: ['dns-client', 'dns'] }
   tags: common
 
 - name: nfsserver
